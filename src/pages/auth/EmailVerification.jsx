@@ -21,7 +21,6 @@ export default function EmailVerification() {
       alert("Invalid verification code. Please try again.");
     }
   };
-
   const handleResendCode = async () => {
     try {
       await resendVerificationCode(email);
