@@ -34,10 +34,11 @@ export const verifyEmailCode = async (code, email) => {
       }
     );
 
-    if (response) {
-      const data = await response.json();
-      return data; // Return the response data if needed
+    if (response.ok) {
+      throw new Error("Invalid verification code.");
     }
+    const data = await response.json();
+    return data; // Return the response data if needed
   } catch (error) {
     console.error("Error verifying code:", error);
     throw error;
