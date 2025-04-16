@@ -13,15 +13,24 @@ export default function EmailVerification() {
   const handleVerifyCode = async () => {
     try {
       const response = await verifyEmailCode(verificationCode, email);
-      alert("Email verified successfully!");
-      navigate("/submit_phoneNumber", {
-        state: { phone: phone },
-      });
+
+      // Check if the response is successful
+      if (response.ok) {
+        alert("Email verified successfully!");
+        navigate("/submit_phoneNumber", {
+          state: { phone: phone },
+        });
+      } else {
+        // Handle non-200 HTTP responses
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Verification failed.");
+      }
     } catch (error) {
-      alert("Invalid verification code. Please try again.");
+      // Catch any errors and display an appropriate message
+      console.error("Error verifying email:", error);
+      alert(error.message || "Invalid verification code. Please try again.");
     }
   };
-
   const handleResendCode = async () => {
     try {
       await resendVerificationCode(email);

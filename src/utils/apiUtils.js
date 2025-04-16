@@ -21,27 +21,16 @@ export const sendVerificationEmail = async (formData, role) => {
   }
 };
 
-export const verifyEmailCode = async (code, email) => {
-  try {
-    const response = await fetch(
-      "https://freelancer-backend-production-9e6b.up.railway.app/api/auth/verify-email",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ code, email }),
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Invalid verification code.");
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error verifying code:", error);
-    throw error;
-  }
+export const verifyEmailCode = async (verificationCode, email) => {
+  const response = await fetch("https://your-backend-api.com/verify-email", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ verificationCode, email }),
+  });
+
+  return response; // Return the raw response to handle it in the component
 };
 
 export const resendVerificationCode = async (email) => {
