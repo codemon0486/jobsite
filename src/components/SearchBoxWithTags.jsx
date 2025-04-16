@@ -20,7 +20,7 @@ const SearchBoxWithTags = ({ placeholder, tags, setTags, className = "" }) => {
         type="text"
         placeholder={placeholder}
         onChange={(e) => setInput(e.target.value)}
-        className={`border border-blue-500 p-2 rounded-md w-full ${className}`}
+        className={`border border-[#0B5F94] p-2 rounded-md w-full ${className}`}
       />
       <div className="flex flex-wrap gap-2">
         {tags.map((tag, idx) => (
