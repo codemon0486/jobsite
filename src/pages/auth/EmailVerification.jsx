@@ -54,12 +54,11 @@ export default function EmailVerification() {
               Resend
             </label>
           </div>
-          <div className="flex items-center mx-auto">
-            <Button
-              title="Verify"
-              className="bg-[#0B5F94] text-white !px-4"
-              onClick={handleVerifyCode}
-            />
+          <div
+            className="flex items-center mx-auto w-max "
+            onClick={handleVerifyCode}
+          >
+            <Button title="Verify" className="bg-[#0B5F94] text-white !px-4" />
           </div>
         </div>
       </div>
