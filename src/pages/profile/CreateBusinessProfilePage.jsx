@@ -21,7 +21,7 @@ const CreateBusinessProfilePage = () => {
           />
           <Textbox placeholder="Company Name" className="w-1/3" />
         </div>
-        <Textbox placeholder="Company overview" />
+        <Textbox placeholder="Company overview" className="w-full" />
       </div>
       <div className="border-b border-[#009DDE] gap-20 flex w-2/3 pb-6 mb-6">
         <div>
@@ -33,8 +33,8 @@ const CreateBusinessProfilePage = () => {
             placeholder="Country"
           />
           <div className="flex gap-2">
-            <Textbox placeholder="Address 1" />
-            <Textbox placeholder="Address 2" className="sm:col-span-2" />
+            <Textbox placeholder="Address 1" className="w-full" />
+            <Textbox placeholder="Address 2" className="w-full" />
           </div>
           <div className="flex gap-2">
             <SearchBoxWithTags

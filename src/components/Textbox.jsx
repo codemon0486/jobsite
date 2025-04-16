@@ -14,7 +14,7 @@ const Textbox = ({
     placeholder={placeholder}
     value={value}
     onChange={(e) => onChange({ ...formData, [e.target.name]: e.target.value })}
-    className={`border border-[#0B5F94] p-2 rounded-md w-full ${className}`}
+    className={`border border-[#0B5F94] p-2 rounded-md ${className}`}
     {...props}
   />
 );
