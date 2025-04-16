@@ -12,15 +12,16 @@ export default function EmailVerification() {
 
   const handleVerifyCode = async () => {
     try {
-      await verifyEmailCode(verificationCode, email);
+      const response = await verifyEmailCode(verificationCode, email);
+      alert("Email verified successfully!");
       navigate("/submit_phoneNumber", {
         state: { phone: phone },
       });
-      alert("Email verified successfully.");
     } catch (error) {
       alert("Invalid verification code. Please try again.");
     }
   };
+
   const handleResendCode = async () => {
     try {
       await resendVerificationCode(email);
