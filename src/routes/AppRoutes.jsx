@@ -6,6 +6,7 @@ import CreateBusinessProfilePage from "../pages/profile/CreateBusinessProfilePag
 import Register from "../pages/auth/Register";
 import Login from "../pages/auth/Login";
 import EmailVerification from "../pages/auth/EmailVerification";
+import PostPhoneNumber from "../pages/auth/PostPhoneNumber";
 
 const AppRoutes = () => {
   return (
@@ -16,6 +17,7 @@ const AppRoutes = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/email_verification" element={<EmailVerification />} />
+      <Route path="/submit_phoneNumber" element={<PostPhoneNumber />} />
     </Routes>
   );
 };

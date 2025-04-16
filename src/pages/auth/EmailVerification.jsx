@@ -7,11 +7,15 @@ import { verifyEmailCode, resendVerificationCode } from "../../utils/apiUtils";
 export default function EmailVerification() {
   const location = useLocation();
   const email = location.state?.email || "";
+  const phone = location.state?.phone || "";
   const [verificationCode, setVerificationCode] = useState("");
 
   const handleVerifyCode = async () => {
     try {
       const response = await verifyEmailCode(verificationCode, email);
+      navigate("/submit_phoneNumber", {
+        state: { phone: phone },
+      });
       alert("Email verified successfully!");
     } catch (error) {
       alert("Invalid verification code. Please try again.");
@@ -29,10 +33,10 @@ export default function EmailVerification() {
 
   return (
     <div className="flex items-center justify-center mt-40 bg-white">
-      <div className="w-full max-w-md p-8 space-y-6">
-        <h2 className="text-center text-xl font-semibold">Verify Your Email</h2>
+      <div className="w-full max-w-xl p-8 space-y-6">
+        <h2 className="text-center text-xl font-semibold">Create Account</h2>
         <h1 className="text-lg text-center">
-          Enter the verification code sent to your email
+          Enter the verification code sent to {email}
         </h1>
         <div className="flex flex-col w-2/3 gap-6 mx-auto">
           <Textbox
