@@ -16,7 +16,7 @@ export default function EmailVerification() {
       navigate("/submit_phoneNumber", {
         state: { phone: phone },
       });
-      alert("Email verified successfully!");
+      alert("Email verified successfully.");
     } catch (error) {
       alert("Invalid verification code. Please try again.");
     }
