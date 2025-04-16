@@ -19,6 +19,8 @@ const PostPhoneNumber = () => {
         {
           size: "invisible",
           callback: () => console.log("reCAPTCHA verified"),
+          // Disable app verification for testing
+          appVerificationDisabledForTesting: true,
         },
         auth
       );
@@ -41,7 +43,6 @@ const PostPhoneNumber = () => {
         phone,
         appVerifier
       );
-      console.log("qwer:", auth);
       window.confirmationResult = confirmation;
       setStep("verify");
     } catch (err) {
