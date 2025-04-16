@@ -31,6 +31,7 @@ const PostPhoneNumber = () => {
     setLoading(true);
     setupRecaptcha();
     const appVerifier = window.recaptchaVerifier;
+    console.log("Sending OTP to:", auth);
 
     try {
       const confirmation = await signInWithPhoneNumber(
@@ -38,6 +39,7 @@ const PostPhoneNumber = () => {
         phone,
         appVerifier
       );
+      console.log("qwer:", auth);
       window.confirmationResult = confirmation;
       setStep("verify");
     } catch (err) {
