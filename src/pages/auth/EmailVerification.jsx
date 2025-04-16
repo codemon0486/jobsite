@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import Textbox from "../../components/Textbox";
 import Button from "../../components/Button";
 import { verifyEmailCode, resendVerificationCode } from "../../utils/apiUtils";
 
@@ -41,10 +40,12 @@ export default function EmailVerification() {
           Enter the verification code sent to your email
         </h1>
         <div className="flex flex-col w-2/3 gap-6 mx-auto">
-          <Textbox
+          <input
+            type="text"
             placeholder="Verification Code"
             value={verificationCode}
             onChange={(e) => setVerificationCode(e.target.value)}
+            className="border border-gray-300 rounded-md p-2"
           />
           <div className="text-center">
             Didn't get a code?{" "}
