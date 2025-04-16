@@ -55,7 +55,7 @@ export default function EmailVerification() {
             </label>
           </div>
           <div
-            className="flex items-center mx-auto w-max "
+            className="flex items-center mx-auto w-max"
             onClick={handleVerifyCode}
           >
             <Button title="Verify" className="bg-[#0B5F94] text-white !px-4" />
