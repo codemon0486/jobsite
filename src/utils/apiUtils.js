@@ -33,7 +33,7 @@ export const verifyEmailCode = async (code, email) => {
         body: JSON.stringify({ code, email }),
       }
     );
-    if (response.ok) {
+    if (!response.ok) {
       throw new Error("Invalid verification code.");
     }
     const data = await response.json();
