@@ -27,7 +27,7 @@ export default function Register() {
     try {
       const data = await sendVerificationEmail(formData, role);
       alert("Email verification sent! Please check your inbox.");
-      navigate("/email-verification", { state: { email: formData.email } });
+      navigate("/email_verification", { state: { email: formData.email } });
     } catch (error) {
       alert("An error occurred while sending the verification email.");
     }
