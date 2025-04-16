@@ -13,16 +13,21 @@ export default function Register() {
     phone: "",
     password: "",
   });
+  const navigate = useNavigate();
 
-  const navigate = useNavigate(); // Initialize the navigate function
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleVerifyEmail = async () => {
     try {
       const data = await sendVerificationEmail(formData, role);
-      navigate("/email_verification", {
-        state: { email: formData.email, phone: formData.phone },
-      }); // Redirect to email verification page
       alert("Email verification sent! Please check your inbox.");
+      navigate("/email-verification", { state: { email: formData.email } });
     } catch (error) {
       alert("An error occurred while sending the verification email.");
     }
@@ -54,42 +59,38 @@ export default function Register() {
             Client
           </label>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Textbox
             placeholder="First name"
             name="firstName"
-            onChange={setFormData}
             value={formData.firstName}
-            formData={formData}
+            onChange={handleInputChange}
           />
           <Textbox
             placeholder="Last name"
             name="lastName"
-            onChange={setFormData}
             value={formData.lastName}
-            formData={formData}
+            onChange={handleInputChange}
           />
           <Textbox
             placeholder="Email"
             name="email"
-            onChange={setFormData}
             value={formData.email}
-            formData={formData}
+            onChange={handleInputChange}
           />
           <Textbox
             placeholder="Phone"
             name="phone"
-            onChange={setFormData}
             value={formData.phone}
-            formData={formData}
+            onChange={handleInputChange}
           />
           <Textbox
             placeholder="Password"
             type="password"
             name="password"
             value={formData.password}
-            onChange={setFormData}
-            formData={formData}
+            onChange={handleInputChange}
           />
           <div className="flex items-center w-max" onClick={handleVerifyEmail}>
             <Button

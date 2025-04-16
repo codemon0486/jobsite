@@ -1,23 +1,18 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import Textbox from "../../components/Textbox";
 import Button from "../../components/Button";
 import { verifyEmailCode, resendVerificationCode } from "../../utils/apiUtils";
 
 export default function EmailVerification() {
   const location = useLocation();
   const email = location.state?.email || "";
-  const phone = location.state?.phone || "";
-
-  console.log("Email:", email);
-  console.log("Phone:", phone);
-
   const [verificationCode, setVerificationCode] = useState("");
 
   const handleVerifyCode = async () => {
     try {
       const response = await verifyEmailCode(verificationCode, email);
       alert("Email verified successfully!");
-      // Redirect to another page or perform further actions
     } catch (error) {
       alert("Invalid verification code. Please try again.");
     }
@@ -40,12 +35,11 @@ export default function EmailVerification() {
           Enter the verification code sent to your email
         </h1>
         <div className="flex flex-col w-2/3 gap-6 mx-auto">
-          <input
-            type="text"
+          <Textbox
             placeholder="Verification Code"
+            name="verificationCode"
             value={verificationCode}
             onChange={(e) => setVerificationCode(e.target.value)}
-            className="border border-gray-300 rounded-md p-2"
           />
           <div className="text-center">
             Didn't get a code?{" "}
