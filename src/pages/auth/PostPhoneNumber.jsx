@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { auth } from "../../utils/firebase"; // Adjust the import path as necessary
 import Button from "../../components/Button";
+import { auth } from "../../utils/firebase";
 
 const PostPhoneNumber = () => {
   const location = useLocation();
-  const navigate = useNavigate();
-
   const phone = location.state?.phone || "";
+
   const [loading, setLoading] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [step, setStep] = useState("send"); // "send" or "verify"
 
   const setupRecaptcha = () => {
     if (!window.recaptchaVerifier) {
@@ -17,9 +18,7 @@ const PostPhoneNumber = () => {
         "recaptcha-container",
         {
           size: "invisible",
-          callback: () => {
-            console.log("reCAPTCHA verified");
-          },
+          callback: () => console.log("reCAPTCHA verified"),
         },
         auth
       );
@@ -27,14 +26,10 @@ const PostPhoneNumber = () => {
   };
 
   const handleSendOtp = async () => {
-    if (!phone) {
-      alert("Phone number is missing.");
-      return;
-    }
+    if (!phone) return alert("Missing phone number");
 
     setLoading(true);
     setupRecaptcha();
-
     const appVerifier = window.recaptchaVerifier;
 
     try {
@@ -44,33 +39,93 @@ const PostPhoneNumber = () => {
         appVerifier
       );
       window.confirmationResult = confirmation;
-      alert("OTP sent to your phone!");
-
-      navigate("/verify-otp", { state: { phone } });
-    } catch (error) {
-      console.error("Failed to send OTP", error);
-      alert("Failed to send OTP. Check phone format or try again.");
+      setStep("verify");
+    } catch (err) {
+      console.error("Failed to send OTP", err);
+      alert("Failed to send code. Try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  return (
-    <div className="flex items-center justify-center mt-40 bg-white">
-      <div className="w-full max-w-xl p-8 space-y-6">
-        <h2 className="text-center text-xl font-semibold">Create Account</h2>
-        <h1 className="text-lg text-center text-gray-700">
-          Your email has been verified. Continue to phone verification.
-        </h1>
+  const handleVerifyOtp = async () => {
+    if (!otp) return alert("Enter the code");
 
-        <div className="flex justify-center w-max items-center mx-auto">
-          <Button
-            onClick={handleSendOtp}
-            title={loading ? "Sending..." : `Send Code to ${phone}`}
-            className="bg-[#0B5F94] text-white disabled:opacity-50"
-            disabled={loading}
-          />
-        </div>
+    try {
+      const result = await window.confirmationResult.confirm(otp);
+      const idToken = await result.user.getIdToken();
+
+      await fetch("/api/verify-phone", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ idToken }),
+      });
+
+      alert("Phone verified!");
+    } catch (err) {
+      console.error("Invalid code", err);
+      alert("Incorrect code. Try again.");
+    }
+  };
+
+  const handleResend = () => {
+    setStep("send");
+    handleSendOtp();
+  };
+
+  // Format phone like (123) 456-7890 (simple example)
+  const formattedPhone = phone.replace(
+    /(\+\d{1,2})(\d{3})(\d{3})(\d{4})/,
+    "$1 ($2) $3 $4"
+  );
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-white">
+      <div className="w-full max-w-sm p-8 space-y-6 text-center">
+        <h2 className="text-xl font-semibold">Create Account</h2>
+
+        {step === "send" && (
+          <>
+            <p className="text-gray-700">
+              Your email has been verified. Continue to phone verification.
+            </p>
+            <Button
+              onClick={handleSendOtp}
+              title={loading ? "Sending..." : `Send Code to ${phone}`}
+              className="bg-[#0B5F94] text-white disabled:opacity-50"
+              disabled={loading}
+            />
+          </>
+        )}
+
+        {step === "verify" && (
+          <>
+            <p className="text-gray-700">
+              Enter the verification code sent to {formattedPhone}
+            </p>
+            <input
+              type="text"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+              placeholder="Verification Code"
+              className="border px-4 py-2 rounded w-full"
+            />
+            <p className="text-sm text-gray-500">
+              Didn’t get a code?{" "}
+              <button
+                onClick={handleResend}
+                className="text-blue-600 underline"
+              >
+                Resend
+              </button>
+            </p>
+            <Button
+              onClick={handleVerifyOtp}
+              title="Verify"
+              className="bg-[#0B5F94] text-white w-full"
+            />
+          </>
+        )}
 
         <div id="recaptcha-container"></div>
       </div>
