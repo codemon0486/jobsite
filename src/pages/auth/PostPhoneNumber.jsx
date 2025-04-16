@@ -29,9 +29,11 @@ const PostPhoneNumber = () => {
     if (!phone) return alert("Missing phone number");
 
     setLoading(true);
+    console.log("phone:", phone);
+    console.log("auth:", auth);
+
     setupRecaptcha();
     const appVerifier = window.recaptchaVerifier;
-    console.log("Sending OTP to:", auth);
 
     try {
       const confirmation = await signInWithPhoneNumber(
