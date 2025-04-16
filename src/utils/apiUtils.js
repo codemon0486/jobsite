@@ -34,12 +34,10 @@ export const verifyEmailCode = async (code, email) => {
       }
     );
 
-    if (!response.ok) {
-      throw new Error("Invalid verification code.");
+    if (response) {
+      const data = await response.json();
+      return data; // Return the response data if needed
     }
-
-    const data = await response.json();
-    return data; // Return the response data if needed
   } catch (error) {
     console.error("Error verifying code:", error);
     throw error;
@@ -49,7 +47,7 @@ export const verifyEmailCode = async (code, email) => {
 export const resendVerificationCode = async (email) => {
   try {
     const response = await fetch(
-      "https://freelancer-backend-production-9e6b.up.railway.app/api/auth/verify-email",
+      "https://freelancer-backend-production-9e6b.up.railway.app/api/auth/register",
       {
         method: "POST",
         headers: {

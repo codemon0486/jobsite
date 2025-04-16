@@ -12,7 +12,7 @@ export default function EmailVerification() {
 
   const handleVerifyCode = async () => {
     try {
-      const response = await verifyEmailCode(verificationCode, email);
+      await verifyEmailCode(verificationCode, email);
       navigate("/submit_phoneNumber", {
         state: { phone: phone },
       });
