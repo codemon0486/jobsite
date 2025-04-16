@@ -5,7 +5,7 @@ const DateBox = ({ value, onChange, className = "", ...props }) => (
     type="date"
     value={value}
     onChange={onChange}
-    className={`border border-blue-500 p-2 rounded-md w-full ${className}`}
+    className={`border border-[#0B5F94] p-2 rounded-md ${className}`}
     {...props}
   />
 );

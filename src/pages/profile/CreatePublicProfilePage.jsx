@@ -27,7 +27,7 @@ export default function CreatePublicProfilePage() {
           </div>
         </div>
         <div className="border-b border-[#009DDE] pb-6">
-          <Textbox placeholder="About Me/Bio" />
+          <Textbox placeholder="About Me/Bio" className="w-full" />
         </div>
         <div className="flex flex-col gap-4 pb-6 border-b border-[#009DDE]">
           <Textbox placeholder="Rate per hour1" className="w-1/3" />
@@ -62,7 +62,7 @@ export default function CreatePublicProfilePage() {
           <Textbox placeholder="Title" className="w-2/3" />
 
           <div className="flex gap-8 items-center w-full">
-            <Textbox placeholder="Department/Agency" className="w-1/4" />
+            <Textbox placeholder="Department/Agency" className="w-1/3" />
             <div className="flex gap-4 items-center">
               <label className="flex items-center gap-2 ">
                 <input type="radio" name="govType" value="State" /> State
@@ -73,7 +73,7 @@ export default function CreatePublicProfilePage() {
             </div>
             <SelectBox
               options={["Level of Dept Experience", "Entry", "Mid", "Senior"]}
-              className="w-1/4"
+              className="w-1/3"
             />
           </div>
 
@@ -83,7 +83,7 @@ export default function CreatePublicProfilePage() {
             <DateBox className="w-1/3" />
             <DateBox className="w-1/3" />
           </div>
-          <Button title="Add More" className="bg-blue-800 text-white" />
+          <Button title="Add More" className="bg-[#0B5F94] text-white" />
         </div>
 
         {/* Degrees */}
@@ -91,20 +91,23 @@ export default function CreatePublicProfilePage() {
           <h3 className="text-md font-semibold">Degrees</h3>
 
           <div className="flex w-full gap-4">
-            <Textbox placeholder="Degree" />
-            <Textbox placeholder="Institution" />
-            <DateBox placeholder="Year Completed" />
-            <Button title="Add More" className="bg-blue-800 w-1/3 text-white" />
+            <Textbox placeholder="Degree" className="w-full" />
+            <Textbox placeholder="Institution" className="w-full" />
+            <DateBox placeholder="Year Completed" className="w-full" />
+            <Button
+              title="Add More"
+              className="bg-[#0B5F94] w-1/3 text-white"
+            />
           </div>
         </div>
       </div>
       <div className="w-full justify-center bg-[#E1F5FD] gap-6 flex border-t py-6 border-gray-400">
-        <Button title="Cancel" className="bg-white text-blue-800" />
+        <Button title="Cancel" className="bg-white text-[#0B5F94]" />
         <Button
           title="Preview Public Profile"
-          className="bg-white text-blue-800"
+          className="bg-white text-[#0B5F94]"
         />
-        <Button title="Save" className="bg-blue-800 text-white" />
+        <Button title="Save" className="bg-[#0B5F94] text-white" />
       </div>
     </>
   );
