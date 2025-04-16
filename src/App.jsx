@@ -1,26 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import CreatePublicProfilePage from "./pages/profile/CreatePublicProfilePage";
-import PublicProfile from "./pages/profile/PublicProfile";
-import CreateBusinessProfilePage from "./pages/profile/CreateBusinessProfilePage";
-import Register from "./pages/auth/Register";
-import Login from "./pages/auth/Login";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import Header from "./components/Header";
+import AppRoutes from "./routes/AppRoutes";
 
 export default function App() {
   return (
     <>
       <Header />
       <Router>
-        <Routes>
-          <Route path="/" element={<CreatePublicProfilePage />} />
-          <Route path="/public_profile" element={<PublicProfile />} />
-          <Route
-            path="/business_profile"
-            element={<CreateBusinessProfilePage />}
-          />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+        <AppRoutes />
       </Router>
     </>
   );
