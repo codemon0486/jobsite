@@ -22,13 +22,16 @@ export const sendVerificationEmail = async (formData, role) => {
 };
 
 export const verifyEmailCode = async (verificationCode, email) => {
-  const response = await fetch("https://freelancer-backend-production-9e6b.up.railway.app/api/auth/verify-email", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ verificationCode, email }),
-  });
+  const response = await fetch(
+    "https://freelancer-backend-production-9e6b.up.railway.app/api/auth/verify-email",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ code: verificationCode, email }),
+    }
+  );
 
   return response; // Return the raw response to handle it in the component
 };
