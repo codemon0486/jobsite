@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Textbox from "../../components/Textbox";
 import Button from "../../components/Button";
 import { verifyEmailCode, resendVerificationCode } from "../../utils/apiUtils";
 
 export default function EmailVerification() {
   const location = useLocation();
+  const navigate = useNavigate();
   const email = location.state?.email || "";
   const phone = location.state?.phone || "";
   const [verificationCode, setVerificationCode] = useState("");
