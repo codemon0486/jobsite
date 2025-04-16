@@ -15,13 +15,18 @@ const SearchBoxWithTags = ({ placeholder, tags, setTags, className = "" }) => {
   };
 
   return (
-    <div className="space-x-2 flex">
-      <input
-        type="text"
-        placeholder={placeholder}
-        onChange={(e) => setInput(e.target.value)}
-        className={`border border-[#0B5F94] p-2 rounded-md ${className}`}
-      />
+    <div className="space-x-2 flex items-center">
+      <div className="relative">
+        <input
+          type="text"
+          placeholder={placeholder}
+          onChange={(e) => setInput(e.target.value)}
+          className={`border border-[#0B5F94] p-2 pl-10 rounded-md ${className}`}
+        />
+        <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+          🔍
+        </span>
+      </div>
       <div className="flex flex-wrap gap-2">
         {tags.map((tag, idx) => (
           <span
