@@ -22,7 +22,7 @@ export const sendVerificationEmail = async (formData, role) => {
 };
 
 export const verifyEmailCode = async (verificationCode, email) => {
-  const response = await fetch("https://your-backend-api.com/verify-email", {
+  const response = await fetch("https://freelancer-backend-production-9e6b.up.railway.app/api/auth/verify-email", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
