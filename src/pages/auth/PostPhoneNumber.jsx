@@ -34,6 +34,7 @@ const PostPhoneNumber = () => {
 
     setupRecaptcha();
     const appVerifier = window.recaptchaVerifier;
+    console.log("appVerify: ", appVerifier);
 
     try {
       const confirmation = await signInWithPhoneNumber(
