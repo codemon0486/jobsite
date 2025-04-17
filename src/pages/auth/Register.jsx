@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Textbox from "../../components/Textbox";
 import Button from "../../components/Button";
 import { sendVerificationEmail } from "../../utils/apiUtils";
+import { validateRegistrationForm } from "../../utils/validationUtils"; // Import validation function
 
 export default function Register() {
   const [role, setRole] = useState("Contractor");
@@ -24,6 +25,14 @@ export default function Register() {
   };
 
   const handleVerifyEmail = async () => {
+    const errors = validateRegistrationForm(formData);
+
+    if (Object.keys(errors).length > 0) {
+      // Display errors to the user
+      alert(Object.values(errors).join("\n"));
+      return;
+    }
+
     try {
       const data = await sendVerificationEmail(formData, role);
       alert("Email verification sent! Please check your inbox.");

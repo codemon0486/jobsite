@@ -14,16 +14,12 @@ const PostPhoneNumber = () => {
 
   const setupRecaptcha = () => {
     if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        "recaptcha-container",
-        {
-          size: "invisible",
-          callback: () => console.log("reCAPTCHA verified"),
-          // Disable app verification for testing
-          appVerificationDisabledForTesting: true,
-        },
-        auth
-      );
+      window.recaptchaVerifier = new RecaptchaVerifier("recaptcha-container", {
+        size: "invisible",
+        callback: () => console.log("reCAPTCHA verified"),
+        // Disable app verification for testing
+        appVerificationDisabledForTesting: true,
+      });
     }
   };
 
