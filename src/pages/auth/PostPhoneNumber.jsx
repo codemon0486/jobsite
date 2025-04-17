@@ -66,13 +66,12 @@ const PostPhoneNumber = () => {
         body: JSON.stringify({ idToken }),
       });
 
-      alert("Phone verified!");
+      alert("Phone verified successfully!");
     } catch (err) {
       console.error("Invalid code", err);
       alert("Incorrect code. Try again.");
     }
   };
-
   const handleResend = () => {
     setStep("send");
     handleSendOtp();
@@ -85,8 +84,8 @@ const PostPhoneNumber = () => {
   );
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
-      <div className="w-full max-w-sm p-8 space-y-6 text-center">
+    <div className="flex items-center justify-center mt-56 bg-white">
+      <div className="w-full max-w-xl p-8 space-y-6 text-center">
         <h2 className="text-xl font-semibold">Create Account</h2>
 
         {step === "send" && (
@@ -131,7 +130,6 @@ const PostPhoneNumber = () => {
             />
           </>
         )}
-
         <div id="recaptcha-container"></div>
       </div>
     </div>
