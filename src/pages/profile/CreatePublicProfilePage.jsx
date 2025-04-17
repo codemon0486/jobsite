@@ -1,17 +1,20 @@
 import { useState } from "react";
 import Textbox from "../../components/Textbox";
-import SearchBoxWithTags from "../../components/SearchBoxWithTags";
+import SearchBox from "../../components/SearchBox";
 import SelectBox from "../../components/SelectBox";
 import DateBox from "../../components/DateBox";
 import Button from "../../components/Button";
+import {
+  skillSuggestions,
+  expertiseSuggestions,
+  certSuggestions,
+  departmentExperienceLevels,
+} from "../../data/selectOptions";
 
 export default function CreatePublicProfilePage() {
-  const [skills, setSkills] = useState(["Skill 1", "Skill 2"]);
-  const [expertise, setExpertise] = useState(["Expertise 1", "Expertise 2"]);
-  const [certs, setCerts] = useState([
-    "Government Contractor",
-    "Consultant Certification",
-  ]);
+  const [skills, setSkills] = useState([]);
+  const [expertise, setExpertise] = useState([]);
+  const [certs, setCerts] = useState([]);
 
   return (
     <>
@@ -30,28 +33,30 @@ export default function CreatePublicProfilePage() {
           <Textbox placeholder="About Me/Bio" className="w-full" />
         </div>
         <div className="flex flex-col gap-4 pb-6 border-b border-[#009DDE]">
-          <Textbox placeholder="Rate per hour1" className="w-1/3" />
+          <Textbox placeholder="Rate per hour" className="w-1/3" />
         </div>
         <div className="flex flex-col gap-4 pb-6 border-b border-[#009DDE]">
-          <Textbox placeholder="Rate" className="w-1/3" />
           <Textbox placeholder="Primary position/Title" className="w-1/3" />
-          <SearchBoxWithTags
+          <SearchBox
             placeholder="Skills"
             tags={skills}
             setTags={setSkills}
+            suggestions={skillSuggestions}
+            className="w-1/3"
+          />
+          <SearchBox
+            placeholder="Expertise"
+            tags={expertise}
+            setTags={setExpertise}
+            suggestions={expertiseSuggestions}
             className="w-1/3"
           />
         </div>
-        <SearchBoxWithTags
-          placeholder="Expertise"
-          tags={expertise}
-          setTags={setExpertise}
-          className="w-1/3"
-        />
-        <SearchBoxWithTags
+        <SearchBox
           placeholder="Certifications"
           tags={certs}
           setTags={setCerts}
+          suggestions={certSuggestions}
           className="w-1/3"
         />
 
@@ -71,10 +76,7 @@ export default function CreatePublicProfilePage() {
                 <input type="radio" name="govType" value="Federal" /> Federal
               </label>
             </div>
-            <SelectBox
-              options={["Level of Dept Experience", "Entry", "Mid", "Senior"]}
-              className="w-1/3"
-            />
+            <SelectBox options={departmentExperienceLevels} className="w-1/3" />
           </div>
 
           <Textbox placeholder="Location" className="w-1/3" />

@@ -1,14 +1,19 @@
 import React from "react";
 
-const Tag = () => {
+const Tags = ({ tags, onRemove }) => {
   return (
-    <div className="flex flex-wrap gap-2">
-      <span className="bg-[#009DDE] text-white px-2 py-1 rounded-full text-sm flex items-center gap-1">
-        <p>Skil1</p>
-        <button>×</button>
-      </span>
+    <div className="flex flex-wrap">
+      {tags.map((tag, index) => (
+        <span
+          key={index}
+          className="bg-[#009DDE] text-white ml-2 px-2 rounded-full flex items-center gap-2"
+        >
+          {tag}
+          <button onClick={() => onRemove(tag)}>&times;</button>
+        </span>
+      ))}
     </div>
   );
 };
 
-export default Tag;
+export default Tags;

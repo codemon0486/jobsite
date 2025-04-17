@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import Textbox from "../../components/Textbox";
 import SelectBox from "../../components/SelectBox";
-import SearchBoxWithTags from "../../components/SearchBoxWithTags";
+import SearchBox from "../../components/SearchBox";
 import Button from "../../components/Button";
 import JobItem from "../../components/JobItem";
+import { specializationSuggestions } from "../../data/selectOptions";
 
 const CreateBusinessProfilePage = () => {
-  const [specialization, setSpecialization] = useState([
-    "specialization 1",
-    "specialization 2",
-  ]);
+  const [specialization, setSpecialization] = useState([]);
   return (
     <div className="max-w-5xl mx-auto p-8 space-y-6">
       <div className=" items-center w-full py-4 border-b border-[#009DDE]">
@@ -37,8 +35,8 @@ const CreateBusinessProfilePage = () => {
             <Textbox placeholder="Address 2" className="w-full" />
           </div>
           <div className="flex gap-2">
-            <SearchBoxWithTags
-              placeholder="Expertise"
+            <SearchBox
+              placeholder="City"
               tags={[]}
               setTags={() => {}}
               className="w-full"
@@ -67,10 +65,11 @@ const CreateBusinessProfilePage = () => {
             placeholder="Country"
             className="w-1/2"
           />
-          <SearchBoxWithTags
+          <SearchBox
             placeholder="Specialization"
             tags={specialization}
             setTags={setSpecialization}
+            suggestions={specializationSuggestions}
             className="w-1/2"
           />
         </div>
