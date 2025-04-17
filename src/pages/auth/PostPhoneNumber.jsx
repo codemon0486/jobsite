@@ -20,8 +20,6 @@ const PostPhoneNumber = () => {
         {
           size: "invisible",
           callback: () => console.log("reCAPTCHA verified"),
-          // Disable app verification for testing
-          appVerificationDisabledForTesting: true,
         }
       );
     }
